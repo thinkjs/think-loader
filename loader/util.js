@@ -5,9 +5,14 @@ const helper = require('think-helper');
 exports.interopRequire = function(obj, safe) {
   if (helper.isString(obj)) {
     if (safe) {
+      const isExist = helper.isExist(obj);
+
       try {
-        obj = require(obj);
+        obj = isExist
+          ? require(obj)
+          : null;
       } catch (e) {
+        console.error(e);
         obj = null;
       }
     } else {
