@@ -15,7 +15,7 @@ const CommonLoader = {
       const filepath = path.join(dir, file);
       const fileExport = interopRequire(filepath);
       // add __filename to export when is class
-      if (helper.isFunction(fileExport)) {
+      if (helper.isFunction(fileExport) && fileExport.prototype) {
         fileExport.prototype.__filename = filepath;
       }
       debug(`load file: ${filepath}`);
